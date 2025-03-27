@@ -49,42 +49,48 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Initialize slider
-    showSlide(currentSlide)
-
-    // Previous button click
-    prevBtn.addEventListener("click", () => {
-        currentSlide--
-        if (currentSlide < 0) {
-            currentSlide = slides.length - 1
-        }
+    if (slides.length > 0 && dots.length > 0) {
         showSlide(currentSlide)
-    })
 
-    // Next button click
-    nextBtn.addEventListener("click", () => {
-        currentSlide++
-        if (currentSlide >= slides.length) {
-            currentSlide = 0
+        // Previous button click
+        if (prevBtn) {
+            prevBtn.addEventListener("click", () => {
+                currentSlide--
+                if (currentSlide < 0) {
+                    currentSlide = slides.length - 1
+                }
+                showSlide(currentSlide)
+            })
         }
-        showSlide(currentSlide)
-    })
 
-    // Dot click
-    dots.forEach((dot, index) => {
-        dot.addEventListener("click", () => {
-            currentSlide = index
-            showSlide(currentSlide)
+        // Next button click
+        if (nextBtn) {
+            nextBtn.addEventListener("click", () => {
+                currentSlide++
+                if (currentSlide >= slides.length) {
+                    currentSlide = 0
+                }
+                showSlide(currentSlide)
+            })
+        }
+
+        // Dot click
+        dots.forEach((dot, index) => {
+            dot.addEventListener("click", () => {
+                currentSlide = index
+                showSlide(currentSlide)
+            })
         })
-    })
 
-    // Auto slide (optional)
-    setInterval(() => {
-        currentSlide++
-        if (currentSlide >= slides.length) {
-            currentSlide = 0
-        }
-        showSlide(currentSlide)
-    }, 5000)
+        // Auto slide (optional)
+        setInterval(() => {
+            currentSlide++
+            if (currentSlide >= slides.length) {
+                currentSlide = 0
+            }
+            showSlide(currentSlide)
+        }, 5000)
+    }
 
     // FAQ Accordion
     const faqItems = document.querySelectorAll(".faq-item")
@@ -155,6 +161,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const aboutSection = document.querySelector(".about")
 
     function checkAboutSection() {
+        if (!aboutSection) return
+
         const aboutTop = aboutSection.getBoundingClientRect().top
         const windowHeight = window.innerHeight
 
@@ -187,6 +195,18 @@ document.addEventListener("DOMContentLoaded", () => {
         })
     }
 
+    // Ensure animations run smoothly on mobile
+    function enableAnimationOptimization() {
+        const animationContainer = document.querySelector(".animation-container")
+        if (animationContainer) {
+            // Add hardware acceleration for smoother animations
+            animationContainer.style.transform = "translateZ(0)"
+            animationContainer.style.backfaceVisibility = "hidden"
+        }
+    }
+
+    enableAnimationOptimization()
+
     // Cookie functions
     function setCookie(name, value, days) {
         let expires = ""
@@ -218,7 +238,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const cookieChoice = getCookie("cookieConsent")
 
     // If no choice has been made, show the banner
-    if (cookieChoice === null) {
+    if (cookieChoice === null && cookieConsent) {
         // Show the banner after a short delay
         setTimeout(() => {
             cookieConsent.classList.add("show")
@@ -226,24 +246,28 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Handle accept button click
-    acceptBtn.addEventListener("click", () => {
-        // Save the choice in a cookie (valid for 365 days)
-        setCookie("cookieConsent", "accepted", 365)
-        // Hide the banner
-        cookieConsent.classList.remove("show")
+    if (acceptBtn) {
+        acceptBtn.addEventListener("click", () => {
+            // Save the choice in a cookie (valid for 365 days)
+            setCookie("cookieConsent", "accepted", 365)
+            // Hide the banner
+            cookieConsent.classList.remove("show")
 
-        // Here you would typically initialize your analytics and tracking scripts
-        console.log("Cookies accepted - analytics would be initialized here")
-    })
+            // Here you would typically initialize your analytics and tracking scripts
+            console.log("Cookies accepted - analytics would be initialized here")
+        })
+    }
 
     // Handle decline button click
-    declineBtn.addEventListener("click", () => {
-        // Save the choice in a cookie (valid for 365 days)
-        setCookie("cookieConsent", "declined", 365)
-        // Hide the banner
-        cookieConsent.classList.remove("show")
+    if (declineBtn) {
+        declineBtn.addEventListener("click", () => {
+            // Save the choice in a cookie (valid for 365 days)
+            setCookie("cookieConsent", "declined", 365)
+            // Hide the banner
+            cookieConsent.classList.remove("show")
 
-        console.log("Cookies declined - only essential cookies will be used")
-    })
+            console.log("Cookies declined - only essential cookies will be used")
+        })
+    }
 })
 

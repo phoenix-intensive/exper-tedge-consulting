@@ -1,4 +1,4 @@
-/* Base Styles */
+
 :root {
     --primary-color: #2563eb;
     --primary-dark: #1d4ed8;
@@ -49,7 +49,6 @@ img {
     max-width: 100%;
     height: auto;
     display: block;
-    border-radius: 5px;
 }
 
 .container {
@@ -238,11 +237,13 @@ header .container {
     justify-content: space-between;
     position: relative;
     z-index: 1;
+    flex-wrap: wrap;
 }
 
 .hero-content {
     flex: 1;
     max-width: 600px;
+    margin-bottom: 30px;
 }
 
 .hero-content h1 {
@@ -266,6 +267,7 @@ header .container {
 
 .hero-image {
     flex: 1;
+    min-width: 300px;
     max-width: 550px;
     position: relative;
 }
@@ -377,7 +379,9 @@ header .container {
 
 .about-image {
     flex: 1;
-    border-radius: 5px;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
 }
 
 /* Benefits Section */
@@ -1075,10 +1079,20 @@ header .container {
     animation: fadeIn 1s ease forwards;
 }
 
+.animate-fade-in:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.animate-fade-in:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+/* Animation Slide In */
 .animate-slide-in {
     opacity: 0;
     transform: translateX(50px);
     animation: slideIn 1s ease forwards;
+    animation-delay: 0.3s;
 }
 
 .animate-on-scroll {
@@ -1227,12 +1241,10 @@ header .container {
     }
 }
 
-/* Add this to the end of your existing CSS file */
-
-/* Hero Animation Styles */
+/* Hero Animation Styles - Improved for Responsive Devices */
 .animation-container {
     position: relative;
-    width: 500px;
+    width: 100%;
     height: 400px;
     background-color: rgba(37, 99, 235, 0.05);
     border-radius: 20px;
@@ -1247,6 +1259,7 @@ header .container {
     display: flex;
     justify-content: center;
     align-items: center;
+    will-change: transform;
 }
 
 .gear-large {
@@ -1294,27 +1307,21 @@ header .container {
 .gear-large .tooth:nth-child(2) {
     transform: rotate(45deg);
 }
-
 .gear-large .tooth:nth-child(3) {
     transform: rotate(90deg);
 }
-
 .gear-large .tooth:nth-child(4) {
     transform: rotate(135deg);
 }
-
 .gear-large .tooth:nth-child(5) {
     transform: rotate(180deg);
 }
-
 .gear-large .tooth:nth-child(6) {
     transform: rotate(225deg);
 }
-
 .gear-large .tooth:nth-child(7) {
     transform: rotate(270deg);
 }
-
 .gear-large .tooth:nth-child(8) {
     transform: rotate(315deg);
 }
@@ -1322,19 +1329,15 @@ header .container {
 .gear-medium .tooth:nth-child(2) {
     transform: rotate(60deg);
 }
-
 .gear-medium .tooth:nth-child(3) {
     transform: rotate(120deg);
 }
-
 .gear-medium .tooth:nth-child(4) {
     transform: rotate(180deg);
 }
-
 .gear-medium .tooth:nth-child(5) {
     transform: rotate(240deg);
 }
-
 .gear-medium .tooth:nth-child(6) {
     transform: rotate(300deg);
 }
@@ -1342,11 +1345,9 @@ header .container {
 .gear-small .tooth:nth-child(2) {
     transform: rotate(90deg);
 }
-
 .gear-small .tooth:nth-child(3) {
     transform: rotate(180deg);
 }
-
 .gear-small .tooth:nth-child(4) {
     transform: rotate(270deg);
 }
@@ -1387,6 +1388,7 @@ header .container {
     border-radius: 5px 5px 0 0;
     opacity: 0;
     animation: grow-bar 1s ease forwards;
+    will-change: transform, opacity;
 }
 
 .bar1 {
@@ -1430,6 +1432,7 @@ header .container {
     position: absolute;
     width: 100%;
     height: 100%;
+    pointer-events: none;
 }
 
 .floating-element {
@@ -1444,6 +1447,7 @@ header .container {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     opacity: 0;
     animation: float 3s ease-in-out infinite, fade-in 1s ease forwards;
+    will-change: transform, opacity;
 }
 
 .floating-element i {
@@ -1500,6 +1504,7 @@ header .container {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    pointer-events: none;
 }
 
 .pulse-circle {
@@ -1510,6 +1515,7 @@ header .container {
     background-color: rgba(37, 99, 235, 0.2);
     transform: translate(-50%, -50%);
     animation: pulse 4s ease-out infinite;
+    will-change: transform, opacity;
 }
 
 .pulse-circle:nth-child(2) {
@@ -1531,10 +1537,119 @@ header .container {
     }
 }
 
+/* Hero Section Responsive Improvements */
+.hero {
+    padding: 180px 0 100px;
+    background-color: #f0f9ff;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    z-index: 1;
+    flex-wrap: wrap;
+}
+
+.hero-content {
+    flex: 1;
+    max-width: 600px;
+    margin-bottom: 30px;
+}
+
+.hero-image {
+    flex: 1;
+    min-width: 300px;
+    max-width: 550px;
+    position: relative;
+}
+
+/* Animation Fade In */
+.animate-fade-in {
+    opacity: 0;
+    animation: fadeIn 1s ease forwards;
+}
+
+.animate-fade-in:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.animate-fade-in:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+/* Animation Slide In */
+.animate-slide-in {
+    opacity: 0;
+    transform: translateX(50px);
+    animation: slideIn 1s ease forwards;
+    animation-delay: 0.3s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
 /* Responsive adjustments for the animation */
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
+    .hero-content,
+    .hero-image {
+        max-width: 100%;
+    }
+
+    .hero-image {
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 992px) {
+    .hero {
+        padding: 150px 0 80px;
+    }
+
+    .hero .container {
+        flex-direction: column;
+    }
+
+    .hero-content {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
     .animation-container {
-        width: 100%;
+        height: 350px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero {
+        padding: 120px 0 60px;
+    }
+
+    .animation-container {
         height: 300px;
     }
 
@@ -1582,6 +1697,90 @@ header .container {
     .pulse-circle {
         width: 150px;
         height: 150px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        padding: 100px 0 50px;
+    }
+
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
+
+    .animation-container {
+        height: 250px;
+    }
+
+    .gear-large {
+        width: 60px;
+        height: 60px;
+        top: 20px;
+        left: 20px;
+    }
+
+    .gear-medium {
+        width: 45px;
+        height: 45px;
+        top: 50px;
+        left: 65px;
+    }
+
+    .gear-small {
+        width: 30px;
+        height: 30px;
+        top: 80px;
+        left: 50px;
+    }
+
+    .chart {
+        width: 120px;
+        height: 90px;
+        right: 15px;
+        bottom: 15px;
+    }
+
+    .chart-bar {
+        width: 15px;
+    }
+
+    .floating-element {
+        width: 35px;
+        height: 35px;
+    }
+
+    .floating-element i {
+        font-size: 1rem;
+    }
+
+    .pulse-circle {
+        width: 120px;
+        height: 120px;
+    }
+
+    .element1 {
+        top: 20px;
+        right: 40px;
+    }
+
+    .element2 {
+        top: 70px;
+        right: 20px;
+    }
+
+    .element3 {
+        bottom: 80px;
+        left: 40px;
+    }
+
+    .element4 {
+        bottom: 30px;
+        left: 20px;
     }
 }
 
@@ -1714,15 +1913,12 @@ header .container {
 .graph-point:nth-child(2) {
     animation-delay: 0.4s;
 }
-
 .graph-point:nth-child(3) {
     animation-delay: 0.8s;
 }
-
 .graph-point:nth-child(4) {
     animation-delay: 1.2s;
 }
-
 .graph-point:nth-child(5) {
     animation-delay: 1.6s;
 }
@@ -1736,11 +1932,9 @@ header .container {
 .icon:nth-child(1) {
     animation-delay: 1s;
 }
-
 .icon:nth-child(2) {
     animation-delay: 1.5s;
 }
-
 .icon:nth-child(3) {
     animation-delay: 2s;
 }
